@@ -13,10 +13,6 @@ RUN apt-get update -y && \
     pip install --upgrade pip && \
     pip install -r requirements.txt
 
-COPY ./entrypoint.sh .
-RUN chmod +x /code/entrypoint.sh
-
 COPY . .
 
-ENTRYPOINT ["/code/entrypoint.sh"]
 CMD ["sh", "-c", "gunicorn config.wsgi:application --bind 0.0.0.0:${PORT}"]
